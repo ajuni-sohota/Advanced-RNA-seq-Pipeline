@@ -1,0 +1,59 @@
+name: rnaseq
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  # Python core
+  - python=3.10
+  - pip>=22.0.4
+  
+  # Data analysis and visualization
+  - numpy>=1.22.3
+  - pandas>=1.4.2
+  - matplotlib>=3.5.1
+  - seaborn>=0.11.2
+  - plotly>=5.7.0
+  - scipy>=1.8.0
+  - scikit-learn>=1.0.2
+  
+  # Bioinformatics tools
+  - star>=2.7.10a
+  - hisat2>=2.2.1
+  - salmon>=1.8.0
+  - kallisto>=0.48.0
+  - samtools>=1.15.1
+  - bedtools>=2.30.0
+  - fastqc>=0.11.9
+  - multiqc>=1.12
+  - trimmomatic>=0.39
+  - fastp>=0.23.2
+  - subread>=2.0.1  # Includes featureCounts
+  - bioconductor-deseq2>=1.34.0
+  - bioconductor-edger>=3.36.0
+  - bioconductor-clusterprofiler>=4.2.2
+  
+  # Dashboard and visualization
+  - streamlit>=1.9.0
+  - altair>=4.2.0
+  - pillow>=9.1.0
+  
+  # Utilities
+  - pyyaml>=6.0
+  - click>=8.1.2
+  - tqdm>=4.64.0
+  - biopython>=1.79
+  - jupyterlab>=3.3.4
+  - notebook>=6.4.11
+  - r-base>=4.1.3
+  - r-essentials>=4.1
+  
+  # Development tools
+  - pytest>=7.1.1
+  - black>=22.3.0
+  - flake8>=4.0.1
+  - pip:
+    - versioneer>=0.21
+    - sphinx>=4.5.0
+    - sphinx-rtd-theme>=1.0.0
+    - pytest-cov>=3.0.0
