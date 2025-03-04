@@ -1,0 +1,126 @@
+# Advanced RNA-Seq Pipeline (ARSP) Configuration Template
+# Author: Ajuni Sohota
+# Version: 1.0.0
+
+# Project information
+project:
+  name: "RNA-Seq Analysis Project"
+  description: "Analysis of RNA-Seq data for [Your Study]"
+  output_dir: "/path/to/output_directory"
+  
+# Sample information
+# For each sample, specify FASTQ file paths and metadata
+samples:
+  sample1:
+    read1: "/path/to/sample1_R1.fastq.gz"
+    read2: "/path/to/sample1_R2.fastq.gz"  # Remove for single-end data
+    condition: "treatment"
+    batch: 1
+  
+  sample2:
+    read1: "/path/to/sample2_R1.fastq.gz"
+    read2: "/path/to/sample2_R2.fastq.gz"  # Remove for single-end data
+    condition: "treatment"
+    batch: 1
+  
+  sample3:
+    read1: "/path/to/sample3_R1.fastq.gz"
+    read2: "/path/to/sample3_R2.fastq.gz"  # Remove for single-end data
+    condition: "control"
+    batch: 1
+  
+  sample4:
+    read1: "/path/to/sample4_R1.fastq.gz"
+    read2: "/path/to/sample4_R2.fastq.gz"  # Remove for single-end data
+    condition: "control"
+    batch: 1
+
+# Reference files
+references:
+  genome: "/path/to/reference_genome.fa"
+  genome_index: "/path/to/genome_index"
+  annotation: "/path/to/genes.gtf"
+  adapters: "/path/to/adapters.fa"
+  transcriptome: "/path/to/transcriptome.fa"  # For Salmon/Kallisto
+
+# Differential expression contrasts
+contrasts:
+  - name: "treatment_vs_control"
+    numerator: "treatment"
+    denominator: "control"
+    description: "Treatment vs. Control comparison"
+
+# Analysis parameters
+parameters:
+  threads: 8
+  memory: "16G"
+  paired_end: true
+  strandedness: 0  # 0 = unstranded, 1 = stranded, 2 = reversely stranded
+  min_read_length: 36
+  
+  # Quality control parameters
+  qc_adapter_removal: true
+  qc_quality_trimming: true
+  
+  # Alignment parameters
+  alignment_max_mismatches: 2
+  
+  # Quantification parameters
+  min_feature_overlap: 10
+  multimapping_handling: "unique"  # unique, all, fraction
+  
+  # Expression analysis parameters
+  normalization: "CPM"  # CPM, TPM, NONE
+  min_count_filter: 10
+  
+  # Differential expression parameters
+  de_method: "DESeq2"  # DESeq2, edgeR
+  padj_threshold: 0.05
+  logfc_threshold: 1
+  
+  # Tool-specific parameters
+  star_parameters:
+    "--outFilterMultimapNmax": 20
+    "--alignSJoverhangMin": 8
+    "--alignSJDBoverhangMin": 1
+    "--outFilterMismatchNmax": 999
+    "--outFilterMismatchNoverReadLmax": 0.04
+    "--alignIntronMin": 20
+    "--alignIntronMax": 1000000
+    "--alignMatesGapMax": 1000000
+  
+  hisat2_parameters:
+    "--max-intronlen": 1000000
+    "--dta": true
+  
+  trimmomatic_parameters:
+    "LEADING": 3
+    "TRAILING": 3
+    "SLIDINGWINDOW": "4:15"
+    "MINLEN": 36
+
+# Paths to external tools
+# Use full paths or commands in PATH
+tools:
+  fastqc: "fastqc"
+  multiqc: "multiqc"
+  trimmer: "trimmomatic"  # trimmomatic or fastp
+  trimmomatic: "trimmomatic-0.39.jar"
+  fastp: "fastp"
+  aligner: "STAR"  # STAR or HISAT2
+  STAR: "STAR"
+  hisat2: "hisat2"
+  samtools: "samtools"
+  quantifier: "featureCounts"  # featureCounts, salmon, or kallisto
+  featureCounts: "featureCounts"
+  salmon: "salmon"
+  kallisto: "kallisto"
+  R: "R"
+
+# Metadata for reproducibility and documentation
+metadata:
+  author: "[Your Name]"
+  email: "[your.email@example.com]"
+  date: "2025-03-04"
+  pipeline_version: "1.0.0"
+  description: "RNA-Seq analysis for [Study Description]"
